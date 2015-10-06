@@ -1,17 +1,16 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -25,13 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
+    @NamedQuery(name = "Person.findByZip", query = "SELECT p FROM Person p WHERE p.infoEntity.adrId.zip = :zip"),
     @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id"),
+    @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.infoEntity.phoneCollection = :phone"),
     @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
     @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname")})
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -39,10 +39,11 @@ public class Person implements Serializable {
     private String firstname;
     @Column(name = "LASTNAME")
     private String lastname;
-    @ManyToMany(mappedBy = "personList")
-    private List<Hobby> hobbyList;
-    @OneToMany(mappedBy = "personID")
-    private List<InfoEntity> infoentityList;
+    @ManyToMany(mappedBy = "personCollection")
+    private Collection<Hobby> hobbyCollection;
+    @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private InfoEntity infoEntity;
 
     public Person() {
     }
@@ -76,21 +77,20 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
-    public List<Hobby> getHobbyList() {
-        return hobbyList;
+    public Collection<Hobby> getHobbyCollection() {
+        return hobbyCollection;
     }
 
-    public void setHobbyList(List<Hobby> hobbyList) {
-        this.hobbyList = hobbyList;
+    public void setHobbyCollection(Collection<Hobby> hobbyCollection) {
+        this.hobbyCollection = hobbyCollection;
     }
 
-    @XmlTransient
-    public List<InfoEntity> getInfoentityList() {
-        return infoentityList;
+    public InfoEntity getInfoEntity() {
+        return infoEntity;
     }
 
-    public void setInfoentityList(List<InfoEntity> infoentityList) {
-        this.infoentityList = infoentityList;
+    public void setInfoEntity(InfoEntity infoEntity) {
+        this.infoEntity = infoEntity;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "infoentity")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Infoentity.findAll", query = "SELECT i FROM Infoentity i"),
-    @NamedQuery(name = "Infoentity.findById", query = "SELECT i FROM Infoentity i WHERE i.id = :id"),
-    @NamedQuery(name = "Infoentity.findByEmail", query = "SELECT i FROM Infoentity i WHERE i.email = :email")})
+    @NamedQuery(name = "InfoEntity.findAll", query = "SELECT i FROM InfoEntity i"),
+    @NamedQuery(name = "InfoEntity.findById", query = "SELECT i FROM InfoEntity i WHERE i.id = :id"),
+    @NamedQuery(name = "InfoEntity.findByEmail", query = "SELECT i FROM InfoEntity i WHERE i.email = :email")})
 public class InfoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,18 +39,15 @@ public class InfoEntity implements Serializable {
     private Integer id;
     @Column(name = "Email")
     private String email;
-    @JoinColumn(name = "PhoneNumber", referencedColumnName = "P_number")
-    @ManyToOne
-    private Phone phoneNumber;
-    @JoinColumn(name = "cvr", referencedColumnName = "cvr")
-    @ManyToOne
-    private Company cvr;
-    @JoinColumn(name = "Person_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private Person personID;
     @JoinColumn(name = "adr_Id", referencedColumnName = "ID")
     @ManyToOne
     private Address adrId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    private Collection<Phone> phoneCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
+    private Person person;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
+    private Company company;
 
     public InfoEntity() {
     }
@@ -70,36 +72,37 @@ public class InfoEntity implements Serializable {
         this.email = email;
     }
 
-    public Phone getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Phone phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Company getCvr() {
-        return cvr;
-    }
-
-    public void setCvr(Company cvr) {
-        this.cvr = cvr;
-    }
-
-    public Person getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(Person personID) {
-        this.personID = personID;
-    }
-
     public Address getAdrId() {
         return adrId;
     }
 
     public void setAdrId(Address adrId) {
         this.adrId = adrId;
+    }
+
+    @XmlTransient
+    public Collection<Phone> getPhoneCollection() {
+        return phoneCollection;
+    }
+
+    public void setPhoneCollection(Collection<Phone> phoneCollection) {
+        this.phoneCollection = phoneCollection;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override
@@ -124,7 +127,7 @@ public class InfoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Infoentity[ id=" + id + " ]";
+        return "Entity.InfoEntity[ id=" + id + " ]";
     }
 
 }

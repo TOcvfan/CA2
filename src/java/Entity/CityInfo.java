@@ -1,7 +1,7 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +21,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "cityinfo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cityinfo.findAll", query = "SELECT c FROM Cityinfo c"),
-    @NamedQuery(name = "Cityinfo.findByZip", query = "SELECT c FROM Cityinfo c WHERE c.zip = :zip"),
-    @NamedQuery(name = "Cityinfo.findByCity", query = "SELECT c FROM Cityinfo c WHERE c.city = :city")})
+    @NamedQuery(name = "CityInfo.findAll", query = "SELECT c FROM CityInfo c"),
+    @NamedQuery(name = "CityInfo.findByZip", query = "SELECT c FROM CityInfo c WHERE c.zip = :zip"),
+    @NamedQuery(name = "CityInfo.findByCity", query = "SELECT c FROM CityInfo c WHERE c.city = :city")})
 public class CityInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,7 +33,7 @@ public class CityInfo implements Serializable {
     @Column(name = "City")
     private String city;
     @OneToMany(mappedBy = "zip")
-    private List<Address> addressList;
+    private Collection<Address> addressCollection;
 
     public CityInfo() {
     }
@@ -59,12 +59,12 @@ public class CityInfo implements Serializable {
     }
 
     @XmlTransient
-    public List<Address> getAddressList() {
-        return addressList;
+    public Collection<Address> getAddressCollection() {
+        return addressCollection;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
+    public void setAddressCollection(Collection<Address> addressCollection) {
+        this.addressCollection = addressCollection;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class CityInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Cityinfo[ zip=" + zip + " ]";
+        return "Entity.CityInfo[ zip=" + zip + " ]";
     }
 
 }

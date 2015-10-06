@@ -1,17 +1,16 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,44 +21,53 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c"),
-    @NamedQuery(name = "Company.findByCName", query = "SELECT c FROM Company c WHERE c.cName = :cName"),
+    @NamedQuery(name = "Company.findById", query = "SELECT c FROM Company c WHERE c.id = :id"),
+    @NamedQuery(name = "Company.findByName", query = "SELECT c FROM Company c WHERE c.name = :name"),
     @NamedQuery(name = "Company.findByDescription", query = "SELECT c FROM Company c WHERE c.description = :description"),
     @NamedQuery(name = "Company.findByCvr", query = "SELECT c FROM Company c WHERE c.cvr = :cvr"),
-    @NamedQuery(name = "Company.findByAdditionalInfo", query = "SELECT c FROM Company c WHERE c.additionalInfo = :additionalInfo"),
     @NamedQuery(name = "Company.findByNumEmployees", query = "SELECT c FROM Company c WHERE c.numEmployees = :numEmployees"),
     @NamedQuery(name = "Company.findByMarketValue", query = "SELECT c FROM Company c WHERE c.marketValue = :marketValue")})
 public class Company implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Column(name = "C_Name")
-    private String cName;
-    @Column(name = "description")
-    private String description;
     @Id
     @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
     @Column(name = "cvr")
     private String cvr;
-    @Column(name = "AdditionalInfo")
-    private String additionalInfo;
     @Column(name = "NumEmployees")
     private Integer numEmployees;
     @Column(name = "MarketValue")
     private Integer marketValue;
-    @OneToMany(mappedBy = "cvr")
-    private List<InfoEntity> infoentityList;
+    @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private InfoEntity infoEntity;
 
     public Company() {
     }
 
-    public Company(String cvr) {
-        this.cvr = cvr;
+    public Company(Integer id) {
+        this.id = id;
     }
 
-    public String getCName() {
-        return cName;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCName(String cName) {
-        this.cName = cName;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -78,14 +86,6 @@ public class Company implements Serializable {
         this.cvr = cvr;
     }
 
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
     public Integer getNumEmployees() {
         return numEmployees;
     }
@@ -102,19 +102,18 @@ public class Company implements Serializable {
         this.marketValue = marketValue;
     }
 
-    @XmlTransient
-    public List<InfoEntity> getInfoentityList() {
-        return infoentityList;
+    public InfoEntity getInfoEntity() {
+        return infoEntity;
     }
 
-    public void setInfoentityList(List<InfoEntity> infoentityList) {
-        this.infoentityList = infoentityList;
+    public void setInfoEntity(InfoEntity infoEntity) {
+        this.infoEntity = infoEntity;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cvr != null ? cvr.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -125,7 +124,7 @@ public class Company implements Serializable {
             return false;
         }
         Company other = (Company) object;
-        if ((this.cvr == null && other.cvr != null) || (this.cvr != null && !this.cvr.equals(other.cvr))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -133,7 +132,7 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Company[ cvr=" + cvr + " ]";
+        return "Entity.Company[ id=" + id + " ]";
     }
 
 }

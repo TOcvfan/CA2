@@ -1,12 +1,10 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,7 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -41,7 +38,7 @@ public class Address implements Serializable {
     @Column(name = "AdditionalInfo")
     private String additionalInfo;
     @OneToMany(mappedBy = "adrId")
-    private List<InfoEntity> infoentityList;
+    private Collection<InfoEntity> infoEntityCollection;
     @JoinColumn(name = "Zip", referencedColumnName = "Zip")
     @ManyToOne
     private CityInfo zip;
@@ -78,12 +75,12 @@ public class Address implements Serializable {
     }
 
     @XmlTransient
-    public List<InfoEntity> getInfoentityList() {
-        return infoentityList;
+    public Collection<InfoEntity> getInfoEntityCollection() {
+        return infoEntityCollection;
     }
 
-    public void setInfoentityList(List<InfoEntity> infoentityList) {
-        this.infoentityList = infoentityList;
+    public void setInfoEntityCollection(Collection<InfoEntity> infoEntityCollection) {
+        this.infoEntityCollection = infoEntityCollection;
     }
 
     public CityInfo getZip() {

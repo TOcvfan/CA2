@@ -1,12 +1,10 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,39 +24,27 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Hobby.findAll", query = "SELECT h FROM Hobby h"),
-    @NamedQuery(name = "Hobby.findById", query = "SELECT h FROM Hobby h WHERE h.id = :id"),
     @NamedQuery(name = "Hobby.findByHobbyNAME", query = "SELECT h FROM Hobby h WHERE h.hobbyNAME = :hobbyNAME"),
     @NamedQuery(name = "Hobby.findByDescription", query = "SELECT h FROM Hobby h WHERE h.description = :description")})
 public class Hobby implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Column(name = "HobbyNAME")
     private String hobbyNAME;
     @Column(name = "description")
     private String description;
     @JoinTable(name = "personhobby", joinColumns = {
-        @JoinColumn(name = "HobbyId", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "HobbyNAME", referencedColumnName = "HobbyNAME")}, inverseJoinColumns = {
         @JoinColumn(name = "PersonId", referencedColumnName = "ID")})
     @ManyToMany
-    private List<Person> personList;
+    private Collection<Person> personCollection;
 
     public Hobby() {
     }
 
-    public Hobby(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public Hobby(String hobbyNAME) {
+        this.hobbyNAME = hobbyNAME;
     }
 
     public String getHobbyNAME() {
@@ -78,18 +64,18 @@ public class Hobby implements Serializable {
     }
 
     @XmlTransient
-    public List<Person> getPersonList() {
-        return personList;
+    public Collection<Person> getPersonCollection() {
+        return personCollection;
     }
 
-    public void setPersonList(List<Person> personList) {
-        this.personList = personList;
+    public void setPersonCollection(Collection<Person> personCollection) {
+        this.personCollection = personCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (hobbyNAME != null ? hobbyNAME.hashCode() : 0);
         return hash;
     }
 
@@ -100,7 +86,7 @@ public class Hobby implements Serializable {
             return false;
         }
         Hobby other = (Hobby) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.hobbyNAME == null && other.hobbyNAME != null) || (this.hobbyNAME != null && !this.hobbyNAME.equals(other.hobbyNAME))) {
             return false;
         }
         return true;
@@ -108,7 +94,7 @@ public class Hobby implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Hobby[ id=" + id + " ]";
+        return "Entity.Hobby[ hobbyNAME=" + hobbyNAME + " ]";
     }
 
 }
