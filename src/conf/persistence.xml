@@ -3,18 +3,18 @@
   <persistence-unit name="CA2DatabasePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entity.Address</class>
-    <class>Entity.Phone</class>
-    <class>Entity.Hobby</class>
-    <class>Entity.Person</class>
-    <class>Entity.Company</class>
-    <class>Entity.InfoEntity</class>
     <class>Entity.CityInfo</class>
+    <class>Entity.Company</class>
+    <class>Entity.Hobby</class>
+    <class>Entity.InfoEntity</class>
+    <class>Entity.Person</class>
+    <class>Entity.Phone</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ca2?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="ThorMis-2013!"/>
+      <property name="javax.persistence.jdbc.password" value="1243"/>
     </properties>
   </persistence-unit>
 </persistence>

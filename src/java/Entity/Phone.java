@@ -34,14 +34,18 @@ public class Phone implements Serializable {
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private InfoEntity id;
-
+    //InfoEntity ie = new InfoEntity();
+    
     public Phone() {
     }
-
+    
+    
+    
     public Phone(String pnumber) {
         this.pnumber = pnumber;
     }
-
+    
+    
     public String getPnumber() {
         return pnumber;
     }

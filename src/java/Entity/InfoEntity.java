@@ -1,6 +1,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -44,6 +45,10 @@ public class InfoEntity implements Serializable {
     private Address adrId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private Collection<Phone> phoneCollection;
+    
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
+//    private Phone phone;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
     private Person person;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
@@ -80,15 +85,24 @@ public class InfoEntity implements Serializable {
         this.adrId = adrId;
     }
 
-    @XmlTransient
-    public Collection<Phone> getPhoneCollection() {
-        return phoneCollection;
-    }
-
-    public void setPhoneCollection(Collection<Phone> phoneCollection) {
-        this.phoneCollection = phoneCollection;
-    }
-
+    
+    
+    
+//    @XmlTransient
+//    public Collection<Phone> getPhoneCollection() {
+//        return phoneCollection;
+//    }
+//
+//    public void setPhoneCollection(Collection<Phone> phoneCollection) {
+//        this.phoneCollection = phoneCollection;
+//    }
+//
+//    
+//    public void addPhone(Phone p){
+//    
+//        getPhoneCollection().add(p);
+//    }
+//    
     public Person getPerson() {
         return person;
     }
@@ -104,6 +118,14 @@ public class InfoEntity implements Serializable {
     public void setCompany(Company company) {
         this.company = company;
     }
+//    
+//    public Phone getPhone(){
+//        return phone;
+//    }
+//    
+//    public void setPhone(Phone phone){
+//        this.phone = phone;
+//    }
 
     @Override
     public int hashCode() {

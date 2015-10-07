@@ -5,6 +5,8 @@
  */
 package Rest;
 
+import Entity.Company;
+import Entity.InfoEntity;
 import Entity.Person;
 import Facade.Facade;
 import com.google.gson.Gson;
@@ -12,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.List;
+import javax.persistence.metamodel.SingularAttribute;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -26,20 +29,21 @@ import javax.ws.rs.PathParam;
  *
  * @author TOcvfan
  */
-@Path("person")
-public class PersonResource {
+@Path("company")
+public class CompanyResource {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     JsonParser parser = new JsonParser();
     Facade facade = new Facade();
-    List<Person> personList;
-    Person person = new Person();
+    List<Company> companyList;
+    Company company = new Company();
+    
     @Context
     private UriInfo context;
 
     /**
      * Creates a new instance of PersonResource
      */
-    public PersonResource() {
+    public CompanyResource() {
     }
 
     /**
@@ -49,33 +53,17 @@ public class PersonResource {
     @GET
     @Produces("application/json")
     @Path("{id}")
-    public String getPerson(@PathParam("id") int id) {
-        person = facade.getPerson(id);
+    public String getPerson(@PathParam("id") String cvr) {
+        company = facade.getCompany(cvr);
         
         Gson gson = new Gson();
         JsonObject response = new JsonObject();
 
-        response.addProperty("FIRSTNAME", person.getFirstname());
-        response.addProperty("LASTNAME", person.getLastname());
+        response.addProperty("NAME", company.getName());
+        
         return gson.toJson(response);
         
     }
-    
-    @GET
-    @Produces("application/json")
-    @Path("/phone/{num}")
-    public String getPerson(@PathParam("num") String phone) {
-        person = facade.getPerson(facade.getPhone(phone).getId().getId());
-        
-        Gson gson = new Gson();
-        JsonObject response = new JsonObject();
-
-        response.addProperty("FIRSTNAME", person.getFirstname());
-        response.addProperty("LASTNAME", person.getLastname());
-        return gson.toJson(response);
-        
-    }
-    
     
 
     /**

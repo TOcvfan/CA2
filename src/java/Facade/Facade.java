@@ -2,6 +2,7 @@ package Facade;
 
 import Entity.Company;
 import Entity.Person;
+import Entity.Phone;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,7 +38,7 @@ public class Facade {
         
         em = emf.createEntityManager();
         Query q = em.createNamedQuery("Person.findByPhone");
-        q.setParameter("phone", phone);
+        q.setParameter("pnumber", phone);
         Person person = (Person) q.getSingleResult();
         em.close();
         return person;
@@ -61,4 +62,13 @@ public class Facade {
         return comp;
     }
     
+    public Phone getPhone(String num){
+        em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Phone.findByPnumber");
+        q.setParameter("pnumber", num);
+        Phone phone = (Phone) q.getSingleResult();
+        em.close();
+        return phone;
+        
+    }
 }
