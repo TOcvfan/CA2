@@ -23,7 +23,7 @@ CREATE TABLE Address (
 );
 
 CREATE TABLE InfoEntity (
-    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    ID INT NOT NULL PRIMARY KEY, 
     Email VARCHAR(255), 
     adr_Id int,
     FOREIGN KEY (adr_ID) REFERENCES Address(ID)

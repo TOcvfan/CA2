@@ -1,0 +1,21 @@
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (2,'Fusce Foundation','dictum eu,','70995177',5888,1556310);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (4,'Mi Eleifend LLC','nibh.','69521760',4263,3739578);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (6,'Urna Nullam Ltd','Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla.','78927603',6646,9741418);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (8,'Ac Turpis Consulting','laoreet ipsum. Curabitur','21452562',7634,2387532);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (10,'Eleifend Egestas Incorporated','nisi. Mauris nulla. Integer urna. Vivamus molestie dapibus ligula. Aliquam','03121204',9752,3841340);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (12,'Vivamus Associates','Fusce aliquet magna a neque. Nullam ut nisi a','33164255',3617,3138673);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (14,'Eu Nulla Company','Aliquam erat volutpat. Nulla dignissim. Maecenas ornare egestas','12608951',3202,9048469);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (16,'Porttitor Interdum Ltd','euismod','48408289',5379,1045007);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (18,'Luctus LLC','ullamcorper','01253458',1705,5139163);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (20,'Sem Ut Inc.','massa. Mauris vestibulum, neque sed dictum eleifend, nunc risus','46270688',169,1268988);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (22,'Lacus Varius Et LLC','libero et','53164239',2596,1807794);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (24,'Quis Diam Company','Aliquam ornare, libero at','47501013',9905,9549492);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (26,'Nascetur Industries','arcu eu','99162834',3450,2826058);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (28,'Interdum Industries','posuere','25642735',6749,4608971);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (30,'Lacus Nulla Tincidunt Incorporated','Maecenas libero est, congue a, aliquet vel, vulputate','54747177',9690,7627747);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (32,'Pulvinar PC','vel, venenatis','54549718',2435,5388593);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (34,'Fermentum LLC','porttitor interdum. Sed auctor odio a purus. Duis','98391991',9021,9517078);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (36,'Dictum Eleifend Nunc Company','morbi tristique','26069856',574,6063734);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (38,'Id Ante Dictum Institute','tempor bibendum. Donec felis orci, adipiscing non, luctus','22016369',5518,7798528);
+INSERT INTO Company (ID,Name,description,cvr,NumEmployees,MarketValue) VALUES (40,'A Nunc In Limited','vel arcu.','40915908',2050,136235);
+
