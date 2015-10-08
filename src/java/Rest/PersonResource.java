@@ -99,6 +99,21 @@ public class PersonResource {
         
     }
     
+    @GET
+    @Produces("application/json")
+    @Path("/zip/{num}")
+    public String getPersonByZip(@PathParam("num") String zip) {
+        personList = facade.getPersonsByZip(zip);
+        
+        Gson gson = new Gson();
+        JsonObject response = new JsonObject();
+
+        response.addProperty("FIRSTNAME", person.getFirstname());
+        response.addProperty("LASTNAME", person.getLastname());
+        
+        return gson.toJson(response);
+        
+    } 
     
 
     /**

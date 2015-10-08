@@ -83,11 +83,11 @@ public class Tester {
         System.out.println("");
         System.out.println("----------------------------------------------------------------------");
         System.out.println("create new info");
-        Address a = new Address();
-        a.setId(9);
-        InfoEntity ie = new InfoEntity("niels@hansen.dk", a);
-        System.out.println(f.createInfo(ie));
-        System.out.println("----------------------------------------------------------------------");
+//        Address a = new Address();
+//        a.setId(9);
+//        InfoEntity ie = new InfoEntity("niels@hansen.dk", a);
+//        System.out.println(f.createInfo(ie));
+//        System.out.println("----------------------------------------------------------------------");
     }
 
 }

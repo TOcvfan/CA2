@@ -53,12 +53,13 @@ public class CompanyResource {
     @GET
     @Produces("application/json")
     @Path("{id}")
-    public String getPerson(@PathParam("id") String cvr) {
+    public String getCompany(@PathParam("id") String cvr) {
         company = facade.getCompany(cvr);
         
         Gson gson = new Gson();
         JsonObject response = new JsonObject();
-
+        
+        response.addProperty("CVR", company.getCvr());
         response.addProperty("NAME", company.getName());
         
         return gson.toJson(response);
