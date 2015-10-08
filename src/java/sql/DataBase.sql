@@ -15,7 +15,7 @@ CREATE TABLE CityInfo (
 );
 
 CREATE TABLE Address ( 
-    ID INT NOT NULL PRIMARY KEY,
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Street  VARCHAR(40),
     Zip  VARCHAR(40),
     AdditionalInfo VARCHAR(40),
@@ -23,7 +23,7 @@ CREATE TABLE Address (
 );
 
 CREATE TABLE InfoEntity (
-    ID INT NOT NULL PRIMARY KEY, 
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     Email VARCHAR(255), 
     adr_Id int,
     FOREIGN KEY (adr_ID) REFERENCES Address(ID)

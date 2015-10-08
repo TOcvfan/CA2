@@ -25,7 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByZip", query = "SELECT p FROM Person p WHERE p.infoEntity.adrId.zip = :zip"),
-    @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.infoEntity.phoneCollection = :pnumber"),
     @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
     @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname")})
@@ -34,7 +33,7 @@ public class Person implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private Integer id;
+    private Integer Pid;
     @Column(name = "FIRSTNAME")
     private String firstname;
     @Column(name = "LASTNAME")
@@ -48,16 +47,16 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(Integer id) {
-        this.id = id;
+    public Person(Integer Pid) {
+        this.Pid = Pid;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPId() {
+        return Pid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPId(Integer Pid) {
+        this.Pid = Pid;
     }
 
     public String getFirstname() {
@@ -96,7 +95,7 @@ public class Person implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (Pid != null ? Pid.hashCode() : 0);
         return hash;
     }
 
@@ -107,7 +106,7 @@ public class Person implements Serializable {
             return false;
         }
         Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.Pid == null && other.Pid != null) || (this.Pid != null && !this.Pid.equals(other.Pid))) {
             return false;
         }
         return true;
@@ -115,7 +114,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Person[ id=" + id + " ]";
+        return "Entity.Person[ id=" + Pid + " ]";
     }
 
 }

@@ -54,6 +54,11 @@ public class InfoEntity implements Serializable {
     public InfoEntity() {
     }
 
+    public InfoEntity(String email, Address adrId) {
+        this.email = email;
+        this.adrId = adrId;
+    }
+   
     public InfoEntity(Integer id) {
         this.id = id;
     }

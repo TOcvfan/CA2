@@ -4,8 +4,8 @@ import Entity.Company;
 import Entity.Person;
 import Entity.Phone;
 import Entity.CityInfo;
+import Entity.Hobby;
 import Entity.InfoEntity;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -123,4 +123,32 @@ public class Facade {
         em.close();
         return ciList;
     }
+    public List<Hobby> getHobbies(){
+        em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Hobby.findAll");
+        List<Hobby> hobbyList;
+        hobbyList = q.getResultList();
+        em.close();
+        return hobbyList;
+    }
+    
+    public Hobby getHobby(String hobbyName) {
+        
+        em = emf.createEntityManager();
+        Hobby h = em.find(Hobby.class, hobbyName);
+        em.close();
+        
+        return h;
+    }
+    public InfoEntity createInfo(InfoEntity ie){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(ie);
+        em.getTransaction().commit();
+        em.close();
+        
+        return ie;
+    }
+    
+
 }

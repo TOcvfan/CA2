@@ -1,5 +1,8 @@
 package Facade;
 
+import Entity.Address;
+import Entity.InfoEntity;
+
 /**
  *
  * @author TOcvfan
@@ -13,6 +16,7 @@ public class Tester {
         String cPhone = "72359556";
         String cvr = "70995177";
         String zip = "2800";
+        String hobby = "Lystfiskeri";
         int id = 1;
 
         System.out.println("Welcome to the test class!");
@@ -71,6 +75,19 @@ public class Tester {
         System.out.println("----------------------------------------------------------------------");
 
         //----------------------------------------------------------------------
+        System.out.println("All hobbies");
+        System.out.println(f.getHobbies());
+        System.out.println("");
+        System.out.println("Specific Hobby");
+        System.out.println(f.getHobby(hobby));
+        System.out.println("");
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("create new info");
+        Address a = new Address();
+        a.setId(9);
+        InfoEntity ie = new InfoEntity("niels@hansen.dk", a);
+        System.out.println(f.createInfo(ie));
+        System.out.println("----------------------------------------------------------------------");
     }
 
 }
