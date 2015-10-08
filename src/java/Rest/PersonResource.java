@@ -33,7 +33,7 @@ public class PersonResource {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     JsonParser parser = new JsonParser();
     Facade facade = new Facade();
-    List<Person> personList;
+    private static List<Person> personList;
     Person person = new Person();
     @Context
     private UriInfo context;
@@ -72,8 +72,7 @@ public class PersonResource {
         //Gson gson = new Gson();
         //JsonObject response = new JsonObject();
         
-        Type type = new TypeToken<List<Person>>() {
-        }.getType();
+        Type type = new TypeToken<List<Person>>(){}.getType();
         
         
         //response.addProperty("FIRSTNAME", person.getFirstname());
