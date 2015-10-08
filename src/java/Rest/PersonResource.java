@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -63,15 +65,37 @@ public class PersonResource {
     
     @GET
     @Produces("application/json")
+    @Path("/all")
+    public String getAllPersons() {
+        personList = facade.getPersons();
+        
+        //Gson gson = new Gson();
+        //JsonObject response = new JsonObject();
+        
+        Type type = new TypeToken<List<Person>>() {
+        }.getType();
+        
+        
+        //response.addProperty("FIRSTNAME", person.getFirstname());
+        //response.addProperty("LASTNAME", person.getLastname());
+        return gson.toJson(personList, type);
+        
+    }
+    
+    
+    
+    @GET
+    @Produces("application/json")
     @Path("/phone/{num}")
     public String getPerson(@PathParam("num") String phone) {
-        person = facade.getPerson(facade.getPhone(phone).getId().getId());
+        person = facade.getPersonByPhone(phone);
         
         Gson gson = new Gson();
         JsonObject response = new JsonObject();
 
         response.addProperty("FIRSTNAME", person.getFirstname());
         response.addProperty("LASTNAME", person.getLastname());
+        
         return gson.toJson(response);
         
     }

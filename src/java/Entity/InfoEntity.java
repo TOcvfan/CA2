@@ -43,11 +43,8 @@ public class InfoEntity implements Serializable {
     @JoinColumn(name = "adr_Id", referencedColumnName = "ID")
     @ManyToOne
     private Address adrId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ie")
     private Collection<Phone> phoneCollection;
-    
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
-//    private Phone phone;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "infoEntity")
     private Person person;

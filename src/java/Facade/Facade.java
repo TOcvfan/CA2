@@ -3,6 +3,9 @@ package Facade;
 import Entity.Company;
 import Entity.Person;
 import Entity.Phone;
+import Entity.CityInfo;
+import Entity.InfoEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,11 +23,10 @@ public class Facade {
     public Person getPerson(int id) {
         
         em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Person.findById");
-        q.setParameter("id", id);
-        Person person = (Person) q.getSingleResult();
+        Person p = em.find(Person.class, id);
         em.close();
-        return person;
+        
+        return p;
     }
     public List<Person> getPersons() {
         em = emf.createEntityManager();
@@ -37,9 +39,9 @@ public class Facade {
     public Person getPersonByPhone(String phone) {
         
         em = emf.createEntityManager();
-        Query q = em.createNamedQuery("Person.findByPhone");
-        q.setParameter("pnumber", phone);
-        Person person = (Person) q.getSingleResult();
+        Phone p = em.find(Phone.class, phone);
+        int id = p.getIe().getId();
+        Person person = em.find(Person.class, id);
         em.close();
         return person;
     }
@@ -70,5 +72,15 @@ public class Facade {
         em.close();
         return phone;
         
+    }
+    
+    public List getZip(String zip){
+        em = emf.createEntityManager();
+        Query q = em.createNamedQuery("CityInfo.findByZip");
+        q.setParameter("zip", zip);
+        List<CityInfo> ciList;
+        ciList = q.getResultList();
+        em.close();
+        return ciList;       
     }
 }

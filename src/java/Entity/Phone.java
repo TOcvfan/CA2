@@ -33,7 +33,7 @@ public class Phone implements Serializable {
     private String description;
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private InfoEntity id;
+    private InfoEntity ie;
     //InfoEntity ie = new InfoEntity();
     
     public Phone() {
@@ -62,12 +62,12 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-    public InfoEntity getId() {
-        return id;
+    public InfoEntity getIe() {
+        return ie;
     }
 
-    public void setId(InfoEntity id) {
-        this.id = id;
+    public void setIe(InfoEntity id) {
+        this.ie = id;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Phone implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the ie fields are not set
         if (!(object instanceof Phone)) {
             return false;
         }
