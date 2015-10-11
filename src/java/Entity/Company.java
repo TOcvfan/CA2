@@ -34,7 +34,7 @@ public class Company implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID")
-    private Integer id;
+    private Integer ie;
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -52,16 +52,28 @@ public class Company implements Serializable {
     public Company() {
     }
 
-    public Company(Integer id) {
-        this.id = id;
+    public Company(Integer ie) {
+        this.ie = ie;
     }
 
-    public Integer getId() {
-        return id;
+    public Company(Integer ie, String name, String description, String cvr, Integer numEmployees, Integer marketValue) {
+        this.ie = ie;
+        this.name = name;
+        this.description = description;
+        this.cvr = cvr;
+        this.numEmployees = numEmployees;
+        this.marketValue = marketValue;
+        
+    }
+    
+    
+
+    public Integer getIe() {
+        return ie;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIe(Integer ie) {
+        this.ie = ie;
     }
 
     public String getName() {
@@ -115,18 +127,18 @@ public class Company implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (ie != null ? ie.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the ie fields are not set
         if (!(object instanceof Company)) {
             return false;
         }
         Company other = (Company) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.ie == null && other.ie != null) || (this.ie != null && !this.ie.equals(other.ie))) {
             return false;
         }
         return true;
@@ -134,7 +146,7 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Company[ id=" + id + " ]";
+        return "Entity.Company[ id=" + ie + " ]";
     }
 
 }

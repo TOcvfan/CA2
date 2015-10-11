@@ -1,11 +1,13 @@
 package Facade;
 
+import Entity.Address;
 import Entity.Company;
 import Entity.Person;
 import Entity.Phone;
 import Entity.CityInfo;
 import Entity.Hobby;
 import Entity.InfoEntity;
+import deploy.DeploymentConfiguration;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +20,7 @@ import javax.persistence.Query;
  */
 public class Facade {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("CA2DatabasePU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.puName);
     EntityManager em;
 
     public Person getPerson(int id) {
@@ -150,6 +152,55 @@ public class Facade {
         em.close();
         
         return ie;
+    }
+    public Phone CreatePhone(Phone ph){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(ph);
+        em.getTransaction().commit();
+        em.close();
+        
+        return ph;
+    }
+    
+    public Person createPerson(Person p){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+        em.close();
+        
+        return p;
+    }
+    
+    public Address CreateAdress(Address a){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(a);
+        em.getTransaction().commit();
+        em.close();
+        
+        return a;
+    }
+    
+    public Company CreateCompany(Company c){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(c);
+        em.getTransaction().commit();
+        em.close();
+        
+        return c;
+    }
+    
+    public Hobby CreateHobby(Hobby h){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(h);
+        em.getTransaction().commit();
+        em.close();
+        
+        return h;
     }
     
 

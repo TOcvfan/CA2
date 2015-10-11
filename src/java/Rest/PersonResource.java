@@ -5,7 +5,10 @@
  */
 package Rest;
 
+import Entity.Address;
+import Entity.CityInfo;
 import Entity.Hobby;
+import Entity.InfoEntity;
 import Entity.Person;
 import Entity.Phone;
 import Facade.Facade;
@@ -14,19 +17,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import static java.util.Collections.list;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -43,7 +40,10 @@ public class PersonResource {
     JsonParser parser = new JsonParser();
     Facade facade = new Facade();
     private static List<Person> personList;
-
+    Person p = new Person();
+    Address a = new Address();
+    CityInfo ci = new CityInfo();
+    Phone ph = new Phone();
     private static JsonArray list = new JsonArray();
     Person person = new Person();
     Hobby hobby = new Hobby();
@@ -148,4 +148,44 @@ public class PersonResource {
     @Consumes("application/json")
     public void putJson(String content) {
     }
+    @POST
+    public String createPerson(String content){
+        JsonObject request = parser.parse(content).getAsJsonObject();
+        String fName = request.get("fName").getAsString();
+        String lName = request.get("lName").getAsString();
+        String eMail = request.get("eMail").getAsString();
+        String phone = request.get("phone").getAsString();
+        String street = request.get("street").getAsString();
+        String zip = request.get("zip").getAsString();
+        String additionalInfo = request.get("additionalInfo").getAsString();
+        String description = request.get("description").getAsString();
+//        String Hobby = request.get("hobby").getAsString();
+        
+        ci.setZip(zip);
+        a = new Address(street, ci, additionalInfo);
+        facade.CreateAdress(a);
+        
+        a.setId(a.getId());
+        
+        InfoEntity ie;
+        ie = new InfoEntity(eMail, a);
+        facade.createInfo(ie);
+        
+        ie.setId(ie.getId());
+        
+        p.setPId(ie.getId());
+        p = new Person(p.getPId(), fName, lName);
+        facade.createPerson(p);
+        
+        ph.setIe(ie);
+        ph = new Phone(phone, description, ph.getIe());
+        facade.CreatePhone(ph);
+        
+        JsonObject response = new JsonObject();
+        response.addProperty("FIRSTNAME", person.getFirstname());
+        response.addProperty("LASTNAME", person.getLastname());
+        return gson.toJson(response);
+    }
+    
+
 }

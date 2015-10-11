@@ -47,6 +47,7 @@ CREATE TABLE Company (
 );
 
 CREATE TABLE Hobby (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     HobbyNAME VARCHAR(60)PRIMARY KEY,
     description VARCHAR(255)
 );
@@ -59,9 +60,9 @@ CREATE TABLE Phone (
 );
 
 CREATE TABLE PersonHobby (
-    HobbyNAME VARCHAR(60),
+    HobbyId int,
     PersonId int,
-    FOREIGN KEY (HobbyNAME) REFERENCES Hobby(HobbyNAME),
+    FOREIGN KEY (HobbyId) REFERENCES Hobby(ID),
     FOREIGN KEY (PersonId) REFERENCES Person(ID)
 );
 

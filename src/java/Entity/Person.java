@@ -47,6 +47,13 @@ public class Person implements Serializable {
     public Person() {
     }
 
+   
+    public Person(Integer Pid, String firstname, String lastname) {
+        this.Pid = Pid;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    
     public Person(Integer Pid) {
         this.Pid = Pid;
     }

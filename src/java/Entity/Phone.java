@@ -38,9 +38,13 @@ public class Phone implements Serializable {
     
     public Phone() {
     }
-    
-    
-    
+
+    public Phone(String pnumber, String description, InfoEntity ie) {
+        this.pnumber = pnumber;
+        this.description = description;
+        this.ie = ie;
+    }
+          
     public Phone(String pnumber) {
         this.pnumber = pnumber;
     }
