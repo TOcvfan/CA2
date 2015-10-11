@@ -1,6 +1,11 @@
 
 $(document).ready(function () {
 
+$("#form").submit(function(e){
+    e.preventDefault();
+    
+});
+
 
     //GET    
     $("#getBtn").click(function () {
@@ -32,26 +37,23 @@ $(document).ready(function () {
                 }).done(function (dataFromServer) {
                     $("#print").empty();
                     $("#print").append("<li>" + dataFromServer.CVR + " " + dataFromServer.NAME + "</li>");
+                }).fail(function (dataFromServer) {
+                    $.ajax({
+                        url: "api/person/zip/" + $("#textField").val(),
+                        type: "GET"
+
+                    }).done(function (dataFromServer) {
+
+                        $("#print").empty();
+                        for (i = 0; i < dataFromServer.length; i++) {
+                            $("#print").append("<li>" + dataFromServer[i].FIRSTNAME + " " + dataFromServer[i].LASTNAME + "</li>");
+                        }
+                    }).fail(function () {
+                        alert("Wat in teh heeellll, dier aint no ppl dawg");
+                    })
                 })
-
             })
-
         })
-
-
-//        $.ajax({
-//            url: "api/person/zip/" + $("#textField").val(),
-//            type: "GET"
-//
-//        }).done(function (dataFromServer) {
-//            $("#theDiv").val(dataFromServer.FIRSTNAME + " " + dataFromServer.LASTNAME);
-//        })
-
-
-
-
-
-
     });
 
 
@@ -60,11 +62,10 @@ $(document).ready(function () {
     var mEnd = "</marquee>";
 
 
+    $("#openPostBtn").click(function () {
+        window.location.href = "Post.html";
+    });
 
-
-    var john = function (i, item) {
-        $("#print").append("<li>" + item + "</li>");
-    };
 
     $("#printBtn").click(function () {
         $.ajax({
@@ -74,11 +75,9 @@ $(document).ready(function () {
         }).done(function (dataFromServer) {
 
             $("#print").empty();
-            for (i=0; i< dataFromServer.length;i++) {
+            for (i = 0; i < dataFromServer.length; i++) {
                 $("#print").append("<li>" + dataFromServer[i].FIRSTNAME + " " + dataFromServer[i].LASTNAME + "</li>");
             }
-
-
 
         }).fail(function () {
             alert("Wat in teh heeellll, dier aint no ppl dawg");
@@ -86,21 +85,50 @@ $(document).ready(function () {
 
     });
 
+
+
     //POST UNFINISHED
-    $("#createBtn").click(function () {
-        var nQ = $("#").val();
+    $("#postBtn").click(function () {
+       
+//        $(function () {
+            var frm = $("#form");
+            var dat = JSON.stringify(frm.serializeArray());
+
+            alert("I am about to POST this:\n\n" + dat);
+             
+             $.ajax({
+                 url: "api/person/",
+                 type: "POST",
+                 data: dat
+                 
+             }).done(function (dataToServer){
+                 console.log(dat + " has been sent to server!");
+                 
+             }).fail(function (){
+                 console.log("OMDG ERRO");
+                 
+             })
+             
+//
+//            $.post(
+//                    frm.attr("action"),
+//                    dat,
+//                    function (data) {
+//                        alert("Response: " + data);
+//            
+//        });
 
 
-        $.ajax({
-            url: "api/person/",
-            type: "POST",
-            data: JSON.stringify({person: $("#theDiv").val()})
-
-        }).done(function (dataToServer) {
-            $("#id").val(dataToServer.person);
-        }).fail(function () {
-            alert("ERHMEGERD Y I KENT CREAT NEW PERSUN!?");
-        })
+//        $.ajax({
+//            url: "api/person/",
+//            type: "POST",
+//            data: JSON.stringify({person: $("#fName").val() + $("#lName").val() + $("#eMail").val() + $("#phone").val() + $("#zip").val() + $("#address").val() + $("#addinfo").val()})
+//
+//        }).done(function (dataToServer) {
+//            $("#fName").val(dataToServer.person);
+//        }).fail(function () {
+//            alert("ERHMEGERD Y I KENT CREAT NEW PERSUN!?");
+//        })
 
     });
     //PUT UNFINISHED

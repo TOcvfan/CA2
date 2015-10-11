@@ -15,6 +15,7 @@ import Facade.Facade;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.List;
@@ -148,21 +149,26 @@ public class PersonResource {
     @Consumes("application/json")
     public void putJson(String content) {
     }
+    
     @POST
     public String createPerson(String content){
-        JsonObject request = parser.parse(content).getAsJsonObject();
-        String fName = request.get("fName").getAsString();
-        String lName = request.get("lName").getAsString();
-        String eMail = request.get("eMail").getAsString();
-        String phone = request.get("phone").getAsString();
-        String street = request.get("street").getAsString();
-        String zip = request.get("zip").getAsString();
-        String additionalInfo = request.get("additionalInfo").getAsString();
-        String description = request.get("description").getAsString();
-//        String Hobby = request.get("hobby").getAsString();
+        JsonElement element = parser.parse(content);
+        JsonArray jArray = element.getAsJsonArray();
+        
+        
+        
+        String fName = jArray.get(0).getAsString();
+        String lName = jArray.get(1).getAsString();
+        String eMail =  jArray.get(2).getAsString();
+        String phone =  jArray.get(3).getAsString();
+        String address =  jArray.get(4).getAsString();
+        String zip =  jArray.get(5).getAsString();
+        String additionalInfo = jArray.get(6).getAsString();
+       // String description =  jArray.get(7).getAsString();
+        
         
         ci.setZip(zip);
-        a = new Address(street, ci, additionalInfo);
+        a = new Address(address, ci, additionalInfo);
         facade.CreateAdress(a);
         
         a.setId(a.getId());
@@ -178,13 +184,14 @@ public class PersonResource {
         facade.createPerson(p);
         
         ph.setIe(ie);
-        ph = new Phone(phone, description, ph.getIe());
+        ph = new Phone(phone, null, ph.getIe());
         facade.CreatePhone(ph);
-        
+       
+        System.out.println(content);
         JsonObject response = new JsonObject();
         response.addProperty("FIRSTNAME", person.getFirstname());
         response.addProperty("LASTNAME", person.getLastname());
-        return gson.toJson(response);
+        return gson.toJson("");
     }
     
 
