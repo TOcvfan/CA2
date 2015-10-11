@@ -5,34 +5,24 @@
             30
         </session-timeout>
     </session-config>
-    <security-constraint>
+<!--    <security-constraint>
         <display-name>ConstraintAdmin</display-name>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>
-            <url-pattern>/admin/*</url-pattern>
-        </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>user</web-resource-name>
-            <description/>
-            <url-pattern>/user/*</url-pattern>
+            <url-pattern>/*</url-pattern>
+            <http-method>PUT</http-method>
+            <http-method>POST</http-method>
+            <http-method>DELETE</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>admin</role-name>
         </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>ConstraintUser</display-name>
-        <web-resource-collection>
-            <web-resource-name>user</web-resource-name>
+        <user-data-constraint>
             <description/>
-            <url-pattern>/user/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>user</role-name>
-        </auth-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <login-config>
         <auth-method>BASIC</auth-method>
@@ -40,13 +30,5 @@
     <security-role>
         <description>DIS DA ADMIN YO</description>
         <role-name>admin</role-name>
-    </security-role>
-    <security-role>
-        <description>DIS JUS REGULAR USER DAWG</description>
-        <role-name>user</role-name>
-    </security-role>
-    <security-role>
-        <description>WHO IN DA HELL NO WHO DIS AT</description>
-        <role-name>rest</role-name>
-    </security-role>
+    </security-role>-->
 </web-app>

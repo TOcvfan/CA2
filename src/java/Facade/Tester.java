@@ -60,12 +60,12 @@ public class Tester {
 //        System.out.println("----------------------------------------------------------------------");
 //
 //        //----------------------------------------------------------------------
-//        System.out.println("Persons from /all:");
-//        System.out.println("");
-//        for (int i = 1; i < f.getPersons().size(); i++) {
-//            System.out.println(f.getPersons().get(i).getFirstname() + " " + f.getPersons().get(i).getLastname());
-//        }
-//        System.out.println("----------------------------------------------------------------------");
+        System.out.println("Persons from /all:");
+        System.out.println("");
+        for (int i = 1; i < f.getPersons().size(); i++) {
+            System.out.println(f.getPersons().get(i).getFirstname() + " " + f.getPersons().get(i).getLastname());
+        }
+        System.out.println("----------------------------------------------------------------------");
 //
 //        //----------------------------------------------------------------------
 //        System.out.println("Persons from Zip: " + zip);
