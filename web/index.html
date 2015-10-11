@@ -10,132 +10,47 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-git2.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                //GET    
-                $("#getPersonBtn").click(function () {
-                    $.ajax({
-                        url: "api/person/" + $("#textField").val(),
-                        type: "GET"
+        <script src="indexJS.js"></script>
 
-                    }).done(function (dataFromServer) {
-                        $("#theDiv").val(dataFromServer.FIRSTNAME + " " + dataFromServer.LASTNAME);
-                    }).fail(function () {
-                        alert("AWWW nO PERSON");
-                    })
-
-                });
-                
-                $("#getCompanyBtn").click(function () {
-                    $.ajax({
-                        url: "api/company/" + $("#textField").val(),
-                        type: "GET"
-
-                    }).done(function (dataFromServer) {
-                        $("#theDiv").val("CVR: "+dataFromServer.CVR + ", Company: " + dataFromServer.NAME);
-                    }).fail(function () {
-                        alert("AWWW nO AINT NO COMPANy");
-                    })
-
-                });
-
-                //GET /blip
-                var john = function (i, item) {
-                    $("#print").append("<marquee behavior=\"alternate\" scrollamount=\"60\">" + item + "</marquee>");
-                };
-
-                $("#printBtn").click(function () {
-                    $.ajax({
-                        url: "api/person/all",
-                        type: "GET"
-
-                    }).done(function (dataFromServer) {
-                        $.each(dataFromServer, john);
-
-                    }).fail(function () {
-                        alert("Wat in teh heeellll, dier aint no ppl dawg");
-                    })
-
-                });
-
-                //POST UNFINISHED
-                $("#createBtn").click(function () {
-                    var nQ = $("#").val();
-
-
-                    $.ajax({
-                        url: "api/person/",
-                        type: "POST",
-                        data: JSON.stringify({person: $("#theDiv").val()})
-
-                    }).done(function (dataToServer) {
-                        $("#theDiv").val(dataToServer.person);
-                    }).fail(function () {
-                        alert("ERHMEGERD Y I KENT CREAT NEW PERSUN!?");
-                    })
-
-                });
-                //PUT UNFINISHED
-                $("#putBtn").click(function () {
-                    $.ajax({
-                        url: "api/person/" + $("#textField").val(),
-                        type: "PUT",
-                        data: JSON.stringify({person: $("#theDiv").val()})
-
-                    }).done(function (dataToServer) {
-                        $("#theDiv").val(dataToServer.person);
-                    }).fail(function () {
-                        alert("ERHMERHGEWD KENT PUT STUF HIER : (");
-                    })
-
-                });
-
-                //DELETE UNFINISHED
-                $("#deleteBtn").click(function () {
-                    $.ajax({
-                        url: "api/person/" + $("#textField").val(),
-                        type: "DELETE",
-                        data: JSON.stringify({person: $("#textField").val()})
-
-
-                    }).done(function (dataToServer) {
-                        $("id").val(dataToServer.person);
-
-
-                    }).fail(function () {
-                        alert("ERHMEGEWD NO DELIet : (");
-
-                    })
-
-                });
-
-            });
-        </script>
     </head>
-    <body>
+    <body bgcolor="FFCC00">
 
-        <div>Test site beeches!</div>
-        <div>DGS</div>
-        <div>
-            <input id="textField" type="text" placeholder="Enter Id" />
-            <button id="getPersonBtn">Get Person</button>
-            <button id="getCompanyBtn">Get Company</button>
-            <button id="createBtn">POST</button>
-            <button id="putBtn">PUT</button>
-            <button id="deleteBtn">DELETE</button>
-            <button id="printBtn">PRINT</button>
+    <center><div id="centerDiv">
+            
+            <br>
+            <br>
+            <h1>New Yellow Pages</h1>
+            <img src="solve.png" alt="solve" style="width:304px;height:228px;">
+            <br>
+            <br>
+            <br>
+            <div>
+                <input id="textField" type="text" placeholder="Type in stuff" />
 
-        </div>
-        <div>
-            <input id="theDiv" style="width: 30em;margin-top: 1em"/></div>
-        <br>
-        <br>
-        <div> List: </div>
-        <div id="print"> </div>
-        <br>
+                <button id="getBtn">Search!</button>
+                <br>
+                <br>
+
+                <button id="createBtn">POST</button>
+                <button id="putBtn">PUT</button>
+                <button id="deleteBtn">DELETE</button>
+                <button id="printBtn">PRINT</button>
+
+
+            </div>
+            <br>
+            <br>
+            <div>
+                <div> Results: </div>
+                <input id="theDiv" style="width: 30em;margin-top: 1em"/></div>
+            <br>
+            <br>
+
+            <div id="print"> </div>
+            <br>
+        </div></center>
 
 
 
-
-    </body>
+</body>
 </html>

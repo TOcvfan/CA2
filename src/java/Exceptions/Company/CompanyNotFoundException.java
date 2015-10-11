@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Exceptions;
+package Exceptions.Company;
 
 /**
  *
  * @author Silas
  */
-public class PersonException extends Exception {
+public class CompanyNotFoundException extends Exception {
     
-    public PersonException(){
     
-    }
+    public static final long serialVersionUID = 42L;
     
-    public PersonException(String msg){
-    super(msg);
+    
+    @Override
+    public String getMessage() {
+        return "Company not found!";
     }
     
 }

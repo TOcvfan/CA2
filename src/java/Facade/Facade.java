@@ -22,14 +22,16 @@ public class Facade {
     EntityManager em;
 
     public Person getPerson(int id) {
-
+        
         em = emf.createEntityManager();
         Person p = em.find(Person.class, id);
         em.close();
-
+        
+        
         return p;
+        
     }
-
+    
     public List<Person> getPersons() {
         em = emf.createEntityManager();
         Query query = em.createNamedQuery("Person.findAll");
