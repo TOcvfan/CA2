@@ -45,6 +45,7 @@ public class PersonResource {
     Address a = new Address();
     CityInfo ci = new CityInfo();
     Phone ph = new Phone();
+    InfoEntity ie = new InfoEntity();
     private static JsonArray list = new JsonArray();
     Person person = new Person();
     Hobby hobby = new Hobby();
@@ -118,7 +119,13 @@ public class PersonResource {
 
         response.addProperty("FIRSTNAME", person.getFirstname());
         response.addProperty("LASTNAME", person.getLastname());
-
+        response.addProperty("Phone", ph.getPnumber());
+        response.addProperty("Description", ph.getDescription());
+        response.addProperty("Email", ie.getEmail());
+        response.addProperty("Address", a.getStreet());
+        response.addProperty("AdditionalInfo", a.getAdditionalInfo());
+        response.addProperty("zip", ci.getZip());
+        response.addProperty("city", ci.getCity());
         return gson.toJson(response);
 
     }
@@ -134,7 +141,13 @@ public class PersonResource {
 
         response.addProperty("FIRSTNAME", person.getFirstname());
         response.addProperty("LASTNAME", person.getLastname());
-
+        response.addProperty("Phone", ph.getPnumber());
+        response.addProperty("Description", ph.getDescription());
+        response.addProperty("Email", ie.getEmail());
+        response.addProperty("Address", a.getStreet());
+        response.addProperty("AdditionalInfo", a.getAdditionalInfo());
+        response.addProperty("zip", ci.getZip());
+        response.addProperty("city", ci.getCity());
         return gson.toJson(response);
 
     }
@@ -173,7 +186,7 @@ public class PersonResource {
         
         a.setId(a.getId());
         
-        InfoEntity ie;
+        
         ie = new InfoEntity(eMail, a);
         facade.createInfo(ie);
         
@@ -191,6 +204,13 @@ public class PersonResource {
         JsonObject response = new JsonObject();
         response.addProperty("FIRSTNAME", person.getFirstname());
         response.addProperty("LASTNAME", person.getLastname());
+        response.addProperty("Phone", ph.getPnumber());
+        response.addProperty("Description", ph.getDescription());
+        response.addProperty("Email", ie.getEmail());
+        response.addProperty("Address", a.getStreet());
+        response.addProperty("AdditionalInfo", a.getAdditionalInfo());
+        response.addProperty("zip", ci.getZip());
+        response.addProperty("city", ci.getCity());
         return gson.toJson("");
     }
     

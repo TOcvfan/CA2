@@ -1,7 +1,10 @@
 package Facade;
 
 import Entity.Address;
+import Entity.CityInfo;
 import Entity.InfoEntity;
+import Entity.Person;
+import Entity.Phone;
 import Exceptions.Person.PersonNotFoundException;
 
 /**
@@ -11,14 +14,22 @@ import Exceptions.Person.PersonNotFoundException;
 public class Tester {
 
     static Facade f = new Facade();
+    static Person p = new Person();
+    static Address a = new Address();
+    static CityInfo ci = new CityInfo();
+    static Phone ph = new Phone();
+    static InfoEntity ie = new InfoEntity();
 
     public static void main(String[] args) throws PersonNotFoundException {
-        String pPhone = "60864820";
+        String pPhone = "12345678";
         String cPhone = "72359556";
         String cvr = "70995177";
         String zip = "2800";
         String hobby = "Lystfiskeri";
         int id = 1;
+        String description = "xxx";
+        String fName = "testperson";
+        String lName = "testpersonEfternavn";
 
         System.out.println("Welcome to the test class!");
 
@@ -84,11 +95,20 @@ public class Tester {
 //        System.out.println("");
 //        System.out.println("----------------------------------------------------------------------");
 //        System.out.println("create new info");
-////        Address a = new Address();
-////        a.setId(9);
-////        InfoEntity ie = new InfoEntity("niels@hansen.dk", a);
-////        System.out.println(f.createInfo(ie));
-////        System.out.println("----------------------------------------------------------------------");
+        Address a = new Address();
+        a.setId(id);
+        InfoEntity ie = new InfoEntity("niels@hansen.dk", a);
+        System.out.println(f.createInfo(ie));
+        ie.setId(ie.getId());
+
+        p.setPId(ie.getId());
+        p = new Person(p.getPId(), fName, lName);
+        f.createPerson(p);
+
+        ph.setIe(ie);
+        ph = new Phone(pPhone, description, ph.getIe());
+        f.CreatePhone(ph);
+        System.out.println("----------------------------------------------------------------------");
     }
 
 }
